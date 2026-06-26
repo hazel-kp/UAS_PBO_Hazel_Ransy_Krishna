@@ -29,12 +29,10 @@ class MahasiswaBidikmisi extends Mahasiswa {
         $this->dana_saku_subsidi = $dana_saku_subsidi;
     }
 
-    // Implementasi abstract method
+    // Implementasi abstract method dengan logika baru
     public function hitungTagihanSemester() {
-        // Mahasiswa Bidik Misi mendapat subsidi penuh (UKT 0)
-        // Tapi tetap dapat dana saku
-        $tagihan = 0;
-        return $tagihan;
+        // Total tagihan = 0 (Digratiskan penuh)
+        return 0;
     }
 
     public function tampilkanSpesifikasiAkademik() {
@@ -46,6 +44,7 @@ class MahasiswaBidikmisi extends Mahasiswa {
                "Nomor KIP Kuliah: {$this->nomor_kip_kuliah}\n" .
                "Dana Saku Subsidi: Rp " . number_format($this->dana_saku_subsidi, 0, ',', '.') . "\n" .
                "Tarif UKT: Rp " . number_format($this->tarif_ukt_nominal, 0, ',', '.') . "\n" .
+               "Status: GRATIS (Ditanggung Negara)\n" .
                "Tagihan Semester: Rp " . number_format($tagihan, 0, ',', '.');
     }
 
@@ -80,5 +79,3 @@ class MahasiswaBidikmisi extends Mahasiswa {
     }
 }
 ?>
-
-//

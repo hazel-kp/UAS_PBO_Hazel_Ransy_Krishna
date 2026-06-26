@@ -29,18 +29,16 @@ class MahasiswaPrestasi extends Mahasiswa {
         $this->minimal_ukt_bersyarat = $minimal_ukt_bersyarat;
     }
 
-    // Implementasi abstract method
+    // Implementasi abstract method dengan logika baru
     public function hitungTagihanSemester() {
-        // Mahasiswa Prestasi mendapat potongan sesuai minimal_ukt_bersyarat
-        // Jika tarif_ukt_nominal > minimal_ukt_bersyarat, maka bayar minimal_ukt_bersyarat
-        if ($this->tarif_ukt_nominal > $this->minimal_ukt_bersyarat) {
-            return $this->minimal_ukt_bersyarat;
-        }
-        return $this->tarif_ukt_nominal;
+        // Total tagihan = tarifUktNominal * 0.25 (Potongan 75%)
+        $tagihan = $this->tarif_ukt_nominal * 0.25;
+        return $tagihan;
     }
 
     public function tampilkanSpesifikasiAkademik() {
         $tagihan = $this->hitungTagihanSemester();
+        $potongan = $this->tarif_ukt_nominal * 0.75;
         return "Mahasiswa Prestasi\n" .
                "Nama: {$this->nama_mahasiswa}\n" .
                "NIM: {$this->nim}\n" .
@@ -48,7 +46,8 @@ class MahasiswaPrestasi extends Mahasiswa {
                "Instansi Beasiswa: {$this->nama_instansi_beasiswa}\n" .
                "Minimal UKT Bersyarat: Rp " . number_format($this->minimal_ukt_bersyarat, 0, ',', '.') . "\n" .
                "Tarif UKT: Rp " . number_format($this->tarif_ukt_nominal, 0, ',', '.') . "\n" .
-               "Tagihan Semester: Rp " . number_format($tagihan, 0, ',', '.');
+               "Potongan Beasiswa (75%): Rp " . number_format($potongan, 0, ',', '.') . "\n" .
+               "Tagihan Semester (25%): Rp " . number_format($tagihan, 0, ',', '.');
     }
 
     // Method SELECT-WHERE untuk mengambil data berdasarkan ID
@@ -82,5 +81,3 @@ class MahasiswaPrestasi extends Mahasiswa {
     }
 }
 ?>
-
-//

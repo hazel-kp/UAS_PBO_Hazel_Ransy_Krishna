@@ -29,25 +29,10 @@ class MahasiswaMandiri extends Mahasiswa {
         $this->nama_wali = $nama_wali;
     }
 
-    // Implementasi abstract method
+    // Implementasi abstract method dengan logika baru
     public function hitungTagihanSemester() {
-        // Logika perhitungan berdasarkan golongan_ukt
-        $potongan = 0;
-        switch($this->golongan_ukt) {
-            case 'A':
-                $potongan = 0.5; // 50% potongan
-                break;
-            case 'B':
-                $potongan = 0.3; // 30% potongan
-                break;
-            case 'C':
-                $potongan = 0.1; // 10% potongan
-                break;
-            default:
-                $potongan = 0;
-        }
-        
-        $tagihan = $this->tarif_ukt_nominal * (1 - $potongan);
+        // Total Tagihan = tarifUktNominal + 100000 (Biaya operasional kemahasiswaan/praktikum)
+        $tagihan = $this->tarif_ukt_nominal + 100000;
         return $tagihan;
     }
 
@@ -60,6 +45,7 @@ class MahasiswaMandiri extends Mahasiswa {
                "Golongan UKT: {$this->golongan_ukt}\n" .
                "Nama Wali: {$this->nama_wali}\n" .
                "Tarif UKT: Rp " . number_format($this->tarif_ukt_nominal, 0, ',', '.') . "\n" .
+               "Biaya Operasional: Rp 100.000\n" .
                "Tagihan Semester: Rp " . number_format($tagihan, 0, ',', '.');
     }
 
@@ -94,5 +80,3 @@ class MahasiswaMandiri extends Mahasiswa {
     }
 }
 ?>
-
-//
