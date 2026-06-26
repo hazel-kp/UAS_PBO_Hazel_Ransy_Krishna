@@ -5,13 +5,14 @@ class MahasiswaPrestasi extends Mahasiswa {
     private $nama_instansi_beasiswa;
     private $minimal_ukt_bersyarat;
 
+    // 🔄 PERUBAHAN: Constructor dengan tambahan parameter $db
     public function __construct($id_mahasiswa, $nama_mahasiswa, $nim, $semester, $tarif_ukt_nominal, $nama_instansi_beasiswa, $minimal_ukt_bersyarat, $db = null) {
-        parent::__construct($id_mahasiswa, $nama_mahasiswa, $nim, $semester, $tarif_ukt_nominal, 'Prestasi', $db);
+        parent::__construct($id_mahasiswa, $nama_mahasiswa, $nim, $semester, $tarif_ukt_nominal, 'Prestasi', $db); // 🔄 Passing $db ke parent
         $this->nama_instansi_beasiswa = $nama_instansi_beasiswa;
         $this->minimal_ukt_bersyarat = $minimal_ukt_bersyarat;
     }
 
-    // Getter & Setter untuk nama_instansi_beasiswa
+    // Getter & Setter (tidak berubah)
     public function getNamaInstansiBeasiswa() {
         return $this->nama_instansi_beasiswa;
     }
@@ -20,7 +21,6 @@ class MahasiswaPrestasi extends Mahasiswa {
         $this->nama_instansi_beasiswa = $nama_instansi_beasiswa;
     }
 
-    // Getter & Setter untuk minimal_ukt_bersyarat
     public function getMinimalUktBersyarat() {
         return $this->minimal_ukt_bersyarat;
     }
@@ -29,13 +29,14 @@ class MahasiswaPrestasi extends Mahasiswa {
         $this->minimal_ukt_bersyarat = $minimal_ukt_bersyarat;
     }
 
-    // Implementasi abstract method dengan logika baru
+    // ✅ TIDAK BERUBAH: Implementasi hitungTagihanSemester
     public function hitungTagihanSemester() {
         // Total tagihan = tarifUktNominal * 0.25 (Potongan 75%)
         $tagihan = $this->tarif_ukt_nominal * 0.25;
         return $tagihan;
     }
 
+    // ✅ TIDAK BERUBAH: Implementasi tampilkanSpesifikasiAkademik
     public function tampilkanSpesifikasiAkademik() {
         $tagihan = $this->hitungTagihanSemester();
         $potongan = $this->tarif_ukt_nominal * 0.75;
@@ -50,7 +51,7 @@ class MahasiswaPrestasi extends Mahasiswa {
                "Tagihan Semester (25%): Rp " . number_format($tagihan, 0, ',', '.');
     }
 
-    // Method SELECT-WHERE untuk mengambil data berdasarkan ID
+    // ✅ TIDAK BERUBAH: Method SELECT-WHERE
     public function getDataById($id) {
         if ($this->db === null) {
             throw new Exception("Koneksi database tidak tersedia");
@@ -65,7 +66,6 @@ class MahasiswaPrestasi extends Mahasiswa {
         if ($result->num_rows > 0) {
             $data = $result->fetch_assoc();
             
-            // Update properti dengan data dari database
             $this->id_mahasiswa = $data['id_mahasiswa'];
             $this->nama_mahasiswa = $data['nama_mahasiswa'];
             $this->nim = $data['nim'];

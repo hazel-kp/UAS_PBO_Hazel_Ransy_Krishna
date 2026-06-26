@@ -5,13 +5,14 @@ class MahasiswaMandiri extends Mahasiswa {
     private $golongan_ukt;
     private $nama_wali;
 
+    // 🔄 PERUBAHAN: Constructor dengan tambahan parameter $db
     public function __construct($id_mahasiswa, $nama_mahasiswa, $nim, $semester, $tarif_ukt_nominal, $golongan_ukt, $nama_wali, $db = null) {
-        parent::__construct($id_mahasiswa, $nama_mahasiswa, $nim, $semester, $tarif_ukt_nominal, 'Mandiri', $db);
+        parent::__construct($id_mahasiswa, $nama_mahasiswa, $nim, $semester, $tarif_ukt_nominal, 'Mandiri', $db); // 🔄 Passing $db ke parent
         $this->golongan_ukt = $golongan_ukt;
         $this->nama_wali = $nama_wali;
     }
 
-    // Getter & Setter untuk golongan_ukt
+    // Getter & Setter (tidak berubah)
     public function getGolonganUkt() {
         return $this->golongan_ukt;
     }
@@ -20,7 +21,6 @@ class MahasiswaMandiri extends Mahasiswa {
         $this->golongan_ukt = $golongan_ukt;
     }
 
-    // Getter & Setter untuk nama_wali
     public function getNamaWali() {
         return $this->nama_wali;
     }
@@ -29,13 +29,14 @@ class MahasiswaMandiri extends Mahasiswa {
         $this->nama_wali = $nama_wali;
     }
 
-    // Implementasi abstract method dengan logika baru
+    // ✅ TIDAK BERUBAH: Implementasi hitungTagihanSemester
     public function hitungTagihanSemester() {
-        // Total Tagihan = tarifUktNominal + 100000 (Biaya operasional kemahasiswaan/praktikum)
+        // Total Tagihan = tarifUktNominal + 100000 (Biaya operasional)
         $tagihan = $this->tarif_ukt_nominal + 100000;
         return $tagihan;
     }
 
+    // ✅ TIDAK BERUBAH: Implementasi tampilkanSpesifikasiAkademik
     public function tampilkanSpesifikasiAkademik() {
         $tagihan = $this->hitungTagihanSemester();
         return "Mahasiswa Mandiri\n" .
@@ -49,7 +50,7 @@ class MahasiswaMandiri extends Mahasiswa {
                "Tagihan Semester: Rp " . number_format($tagihan, 0, ',', '.');
     }
 
-    // Method SELECT-WHERE untuk mengambil data berdasarkan ID
+    // ✅ TIDAK BERUBAH: Method SELECT-WHERE
     public function getDataById($id) {
         if ($this->db === null) {
             throw new Exception("Koneksi database tidak tersedia");
@@ -64,7 +65,6 @@ class MahasiswaMandiri extends Mahasiswa {
         if ($result->num_rows > 0) {
             $data = $result->fetch_assoc();
             
-            // Update properti dengan data dari database
             $this->id_mahasiswa = $data['id_mahasiswa'];
             $this->nama_mahasiswa = $data['nama_mahasiswa'];
             $this->nim = $data['nim'];

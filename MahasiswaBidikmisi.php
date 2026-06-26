@@ -5,13 +5,14 @@ class MahasiswaBidikmisi extends Mahasiswa {
     private $nomor_kip_kuliah;
     private $dana_saku_subsidi;
 
+    // 🔄 PERUBAHAN: Constructor dengan tambahan parameter $db
     public function __construct($id_mahasiswa, $nama_mahasiswa, $nim, $semester, $tarif_ukt_nominal, $nomor_kip_kuliah, $dana_saku_subsidi, $db = null) {
-        parent::__construct($id_mahasiswa, $nama_mahasiswa, $nim, $semester, $tarif_ukt_nominal, 'Bidik Misi', $db);
+        parent::__construct($id_mahasiswa, $nama_mahasiswa, $nim, $semester, $tarif_ukt_nominal, 'Bidik Misi', $db); // 🔄 Passing $db ke parent
         $this->nomor_kip_kuliah = $nomor_kip_kuliah;
         $this->dana_saku_subsidi = $dana_saku_subsidi;
     }
 
-    // Getter & Setter untuk nomor_kip_kuliah
+    // Getter & Setter (tidak berubah)
     public function getNomorKipKuliah() {
         return $this->nomor_kip_kuliah;
     }
@@ -20,7 +21,6 @@ class MahasiswaBidikmisi extends Mahasiswa {
         $this->nomor_kip_kuliah = $nomor_kip_kuliah;
     }
 
-    // Getter & Setter untuk dana_saku_subsidi
     public function getDanaSakuSubsidi() {
         return $this->dana_saku_subsidi;
     }
@@ -29,12 +29,13 @@ class MahasiswaBidikmisi extends Mahasiswa {
         $this->dana_saku_subsidi = $dana_saku_subsidi;
     }
 
-    // Implementasi abstract method dengan logika baru
+    // ✅ TIDAK BERUBAH: Implementasi hitungTagihanSemester
     public function hitungTagihanSemester() {
         // Total tagihan = 0 (Digratiskan penuh)
         return 0;
     }
 
+    // ✅ TIDAK BERUBAH: Implementasi tampilkanSpesifikasiAkademik
     public function tampilkanSpesifikasiAkademik() {
         $tagihan = $this->hitungTagihanSemester();
         return "Mahasiswa Bidik Misi\n" .
@@ -48,7 +49,7 @@ class MahasiswaBidikmisi extends Mahasiswa {
                "Tagihan Semester: Rp " . number_format($tagihan, 0, ',', '.');
     }
 
-    // Method SELECT-WHERE untuk mengambil data berdasarkan ID
+    // ✅ TIDAK BERUBAH: Method SELECT-WHERE
     public function getDataById($id) {
         if ($this->db === null) {
             throw new Exception("Koneksi database tidak tersedia");
@@ -63,7 +64,6 @@ class MahasiswaBidikmisi extends Mahasiswa {
         if ($result->num_rows > 0) {
             $data = $result->fetch_assoc();
             
-            // Update properti dengan data dari database
             $this->id_mahasiswa = $data['id_mahasiswa'];
             $this->nama_mahasiswa = $data['nama_mahasiswa'];
             $this->nim = $data['nim'];
