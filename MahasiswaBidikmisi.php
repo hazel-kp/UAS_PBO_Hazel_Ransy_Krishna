@@ -80,3 +80,5 @@ class MahasiswaBidikmisi extends Mahasiswa {
     }
 }
 ?>
+
+//

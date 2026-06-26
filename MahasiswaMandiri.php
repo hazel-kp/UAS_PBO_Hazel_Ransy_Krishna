@@ -94,3 +94,5 @@ class MahasiswaMandiri extends Mahasiswa {
     }
 }
 ?>
+
+//

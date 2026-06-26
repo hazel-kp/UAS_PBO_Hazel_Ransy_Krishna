@@ -82,3 +82,5 @@ class MahasiswaPrestasi extends Mahasiswa {
     }
 }
 ?>
+
+//
